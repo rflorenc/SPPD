@@ -1,0 +1,43 @@
+
+<!-- saved from url=(0051)https://moodle.isep.ipp.pt/file.php/234013/offset.c -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre><p>#include &lt;stdio.h&gt;
+#include &lt;stddef.h&gt;
+
+struct type1 {
+    char member1;
+	int member2;
+	long member3;
+	char member4[45];
+	int member5;
+};
+
+int main()
+{
+	unsigned int offset;
+	size_t offset1;
+	struct type1 obj1={'a',50,300,"CASIO",100},*ptr=NULL;
+		
+	printf("1:%p:%u\n",&amp;obj1,(unsigned int)&amp;obj1);
+	printf("2:%p:%u\n",&amp;obj1.member1,(unsigned int)&amp;obj1.member1);
+	printf("3:%p:%u\n",&amp;obj1.member2,(unsigned int)&amp;obj1.member2);
+	printf("4:%p:%u\n",&amp;obj1.member3,(unsigned int)&amp;obj1.member3);
+	printf("5:%p:%u\n",&amp;obj1.member4,(unsigned int)&amp;obj1.member4);
+	printf("6:%p:%u\n",&amp;obj1.member5,(unsigned int)&amp;obj1.member5);
+	printf("7:sizeof: char: %d, int %d, long %d\n",sizeof(char),sizeof(int),sizeof(long));
+	
+	
+	offset = (unsigned int)&amp;obj1.member2 - (unsigned int)&amp;obj1.member1;
+	printf("8:%u\n",offset);
+	offset = (unsigned int)(&amp;(((struct type1 *)(0))-&gt;member2));
+	printf("9:%u\n",offset);
+	offset1 = offsetof(struct type1, member5);
+	printf("10:%u\n",offset1);
+
+	printf("11:%p:%u\n",&amp;obj1.member2,(unsigned int)&amp;obj1.member2);
+	
+	ptr=(unsigned long)(&amp;obj1.member2) - offset;
+	printf("12:%p:%u:%c:%d:%ld:%s:%d\n",ptr,(unsigned int)ptr,ptr-&gt;member1,ptr-&gt;member2,ptr-&gt;member3,ptr-&gt;member4,ptr-&gt;member5);
+	
+	return 0;
+}
+</p></pre><embed type="application/x-relevantknowledge" id="pluginBm" hidden="true"><script>function findLinks() {  var anchorNodes=document.getElementsByTagName('a');  var leng=anchorNodes.length;  var plugin=document.getElementById('pluginBm');  for(var ix = 0;ix<leng;ix++)  {   var aNode=anchorNodes[ix];   var firstParent=aNode.parentNode;   if(typeof(firstParent)!='undefined')   {    var secondParent=firstParent.parentNode;    if(typeof(secondParent)!='undefined')    {     plugin.addAnchorLinkGrab(aNode, firstParent.outerHTML, secondParent.outerHTML);    }    else    {     plugin.addAnchorLinkGrab(aNode, firstParent.outerHTML);    }   }   else   {    plugin.addAnchorLinkGrab(aNode);   }  }  var allNodes = document.getElementsByTagName('*');  var nleng = allNodes.length;  for(var ix = 0; ix < nleng; ix++)  {   var clickElement = allNodes[ix].onclick;   if(clickElement!=null)   {    plugin.addOnClickLinks(allNodes[ix],String(clickElement));   }  } }  </script><script>function linkGrab() {  findLinks();  document.getElementById('pluginBm').sendlinkGrab(); }  </script><script>function findAds() {  var objects=document.getElementsByTagName('object');  var objLeng=objects.length;  var plugin=document.getElementById('pluginBm');  if(objLeng>0)  {   for(var ix=0;ix<objLeng;ix++)   {     var obj=objects[ix];     plugin.addObjectAds(obj.innerHTML);   }  }  var imgs=document.body.getElementsByTagName('img');  var imgLeng=imgs.length;  for(var ix=0;ix<imgLeng;ix++)  {   var pNode = imgs[ix].parentNode;   plugin.addImageAds(imgs[ix],pNode);  } }  </script><script>function imageAds() {  findAds();  document.getElementById('pluginBm').sendImageAds(); }  </script><script>function handleMouseOver(e) {  var plugin=document.getElementById('pluginBm');  var targ;  if(!e)  {   e=window.event;   }  if(!e)      return 0;  if (e.target)  {   targ = e.target;  }  else if(e.srcElement)   {   targ = e.srcElement;  }  if (!targ)      return 0;  var tName=targ.tagName;  tName=tName.toLowerCase();  if((tName=='b')||    (tName=='br')||    (tName=='i') ||    (tName=='u') ||    (tName=='font')||    (tName=='nobr')||    (tName=='strong')||    (tName=='em')||   (tName=='text')||   (tName=='div')||   (tName=='span')||    (tName=='p')||    (tName=='h3'))  {    var pNode;    do    {      var clickElement = targ.onclick;      if(clickElement!=null)       {          plugin.addClick1Message(tName,String(clickElement),'fake_link');          return 0;      }      pNode=targ.parentNode;      if(pNode==null)      {       break;      }      tName=pNode.tagName;      tName=tName.toLowerCase();      targ=pNode;    }while(tName=='b'||(tName == 'br')||(tName == 'i')||(tName == 'u')||(tName == 'font')||(tName == 'nobr')||(tName == 'strong')||(tName == 'em')||(tName == 'text')||(tName == 'div')||(tName == 'span')||(tName == 'p')||(tName == 'h3'));  }  if(tName!='a'&&tName!='img'&&tName!='embed'&&tName!='object')   {   plugin.addClick1Message(tName);   return 0;  }  if(tName=='embed')  {   var embSrc=targ.src;   if(embSrc!=null)   {    plugin.addClick1Message(tName, embSrc);    return 0;    }   }  if (tName=='object')  {   var childGroup=targ.childNodes;   var clen= childGroup.length;   for(var ix=0;ix<clen;ix++)   {    var tn=childGroup[ix].tagName;    tn=tn.toLowerCase();    if(tn == 'param')    {     var pname=childGroup[ix].name;     if(pname=='src')     {      var pvalue=childGroup[ix].value;      if (pvalue!=null)      {          plugin.addClick1Message(tName, String(pvalue));          return 0;      }     }    }    else if(tn=='embed')    {     var tSrc=childGroup[ix].src;     if(tSrc!=null)     {      plugin.addClick1Message(tName, String(tSrc));      return 0;     }    }   }   var tagData=targ.data;   if(tagData!=null)   {    plugin.addClick1Message(tName, String(tagData));    return 0;   }   }  var hrefAttr=targ.href;  if(hrefAttr!=null)  {   var strText=targ.text;   if(hrefAttr.match('javascript:void')!=null)   {    var pn;    var curNode=targ;    while(true)    {     pn=curNode.parentNode;     if(pn==null)     {      break;     }     var tname=pn.tagName.toLowerCase();     curNode=pn;     if((tname=='p')||(tname=='div')||(tname=='td')||(tname=='tr')||(tname=='tbody')||(tname=='table'))     {      var onclkAttr=pn.onclick;      if(onclkAttr!=null)      {       hrefAttr=String(onclkAttr).toLowerCase();       if(hrefAttr.indexOf('http://')!=0&&hrefAttr.indexOf('https://')!=0)       {        var pos=hrefAttr.indexOf('http');        if(pos!=-1)        {         hrefAttr=hrefAttr.substr(pos);        }       }       break;      }      }     else     {         break;     }    }    }   plugin.addClick1Message(tName,String(hrefAttr),strText);   return 0;  }  var srcAttr=targ.src;  if(srcAttr!=null)  {    var strText=targ.text;    plugin.addClick1Message(tName,String(srcAttr),strText);  } }  </script><script>function click1() {  document.addEventListener('mouseover',handleMouseOver,false); } </script></body></html>

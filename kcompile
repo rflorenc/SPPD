@@ -1,0 +1,7 @@
+#!/bin/bash
+sudo rm -R /lib/modules/2.6.34-casio.old
+sudo mv /lib/modules/2.6.34-casio /lib/modules/2.6.34-casio.old
+cd linux-2.6.34-casio/
+sudo make-kpkg --initrd --append-to-version=-casio kernel-image  2> ../errors
+cd ..
+
